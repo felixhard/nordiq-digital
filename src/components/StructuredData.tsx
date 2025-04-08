@@ -4,8 +4,8 @@ export default function StructuredData() {
         "@type": "Organization",
         "name": "ArctisDev",
         "description": "Expert web development agency specializing in SaaS platforms, custom web solutions, and AI applications.",
-        "url": "https://arctisdev.se",
-        "logo": "https://arctisdev.se/logo.png",
+        "url": "https://www.arctisdev.se",
+        "logo": "https://www.arctisdev.se/logo.png",
         "sameAs": [
             "https://twitter.com/arctisdev",
             "https://linkedin.com/company/arctisdev",

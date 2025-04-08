@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
             disallow: ["/api/", "/dashboard/", "/auth/"],
         },
         // @todo: add domain here
-        sitemap: "https://arctisdev.se/sitemap.xml",
+        sitemap: "https://www.arctisdev.se/sitemap.xml",
     };
 }

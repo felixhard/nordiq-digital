@@ -24,31 +24,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Return combined sitemap
     return [
         {
-            url: "https://arctisdev.se",
+            url: "https://www.arctisdev.se",
             lastModified: new Date(),
             changeFrequency: "yearly",
             priority: 1,
         },
         {
-            url: "https://arctisdev.se/#why-us",
+            url: "https://www.arctisdev.se/#why-us",
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: "https://arctisdev.se/#pricing",
+            url: "https://www.arctisdev.se/#pricing",
             lastModified: new Date(),
             changeFrequency: "weekly",
             priority: 0.9,
         },
         {
-            url: "https://arctisdev.se/#contact",
+            url: "https://www.arctisdev.se/#contact",
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.8,
         },
         {
-            url: "https://arctisdev.se/#faq",
+            url: "https://www.arctisdev.se/#faq",
             lastModified: new Date(),
             changeFrequency: "monthly",
             priority: 0.7,
