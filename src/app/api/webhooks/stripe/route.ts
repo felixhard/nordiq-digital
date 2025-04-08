@@ -1,5 +1,5 @@
 // Import necessary dependencies
-import { getTierFromPriceId } from "@/config";
+import { getTierFromPriceId, getTierName } from "@/config";
 import { db } from "@/db";
 import { sendEmail } from "@/lib/resend";
 import { stripe } from "@/lib/stripe";
@@ -194,10 +194,12 @@ export async function POST(request: Request) {
                 // Get the price ID from the subscription
                 const priceId = subscription.items.data[0]?.price.id;
                 const subscriptionTier = getTierFromPriceId(priceId);
+                const tierName = getTierName(subscriptionTier);
 
                 console.log("Subscription details:", {
                     priceId,
                     subscriptionTier,
+                    tierName,
                     subscriptionType,
                 });
 
@@ -228,11 +230,11 @@ export async function POST(request: Request) {
                         await sendEmail({
                             to: user.email,
                             subject: "Welcome to ArctisDev!",
-                            text: `Thank you for subscribing to our ${subscriptionTier} plan!`,
+                            text: `Thank you for subscribing to our ${tierName} plan!`,
                             html: `
                                 <h1>Welcome to ArctisDev!</h1>
-                                <p>Thank you for subscribing to our ${subscriptionTier} plan!</p>
-                                <p>You now have access to all ${subscriptionTier} features.</p>
+                                <p>Thank you for subscribing to our ${tierName} plan!</p>
+                                <p>You now have access to all ${tierName} features.</p>
                                 <p>Subscription type: ${subscriptionType}</p>
                             `,
                         });

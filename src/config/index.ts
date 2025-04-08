@@ -70,4 +70,10 @@ export function getTierFromPriceId(priceId: string): SubscriptionTier {
     return (plan?.tier ?? "FREE") as SubscriptionTier;
 }
 
+export function getTierName(tier: SubscriptionTier): string {
+    const plans = Object.values(config.stripe.plans);
+    const plan = plans.find((plan) => plan.tier === tier);
+    return plan?.name || "Free Plan";
+}
+
 export default config;

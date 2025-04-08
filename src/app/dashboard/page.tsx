@@ -5,10 +5,13 @@ import Button from "@/components/ui/Button";
 import Text from "@/components/ui/Text";
 import withAuth, { WithAuthProps } from "@/hoc/withAuth";
 import { useSession } from "next-auth/react";
-import Link from "next/link"; // Import Next.js Link
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { getTierName } from "@/config";
 
 function DashboardPage({ isAuthenticated }: WithAuthProps) {
     const { data: session } = useSession();
+    const router = useRouter();
 
     console.log("Session", session);
 
@@ -21,14 +24,14 @@ function DashboardPage({ isAuthenticated }: WithAuthProps) {
 
                         <div className="flex items-center gap-4">
                             <Text>
-                                Current Plan - {session?.user.subscriptionPlan}
+                                Current Plan - {session?.user.subscriptionPlan ? getTierName(session.user.subscriptionPlan) : "Free Plan"}
                             </Text>
 
                             {session?.user.subscriptionPlan === "FREE" && (
                                 <>
                                     <Button
                                         onClick={() => {
-                                            window.location.href = "/#pricing";
+                                            router.push("/#pricing");
                                         }}
                                     >
                                         Upgrade
@@ -37,7 +40,6 @@ function DashboardPage({ isAuthenticated }: WithAuthProps) {
                                     <Link href="/">
                                         <Button variant="secondary">Home</Button>
                                     </Link>
-                                    
                                 </>
                             )}
                             
