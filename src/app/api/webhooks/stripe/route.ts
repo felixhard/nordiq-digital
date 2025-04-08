@@ -17,20 +17,52 @@ export async function POST(request: Request) {
         
         // Get the raw request body as text
         const body = await request.text();
-        // Get the Stripe signature from headers for verification
-        const signature = headers().get("stripe-signature")!;
+        const signature = headers().get("stripe-signature");
 
-        console.log("Webhook signature:", signature);
-        console.log("Webhook secret configured:", !!webhookSecret);
-        console.log("Webhook secret length:", webhookSecret?.length || 0);
+        if (!signature) {
+            console.error("No Stripe signature found in request headers");
+            return new Response(
+                JSON.stringify({ error: "No signature found" }),
+                { status: 400 }
+            );
+        }
+
+        // Log request details for debugging
+        console.log("Request details:", {
+            signature,
+            bodyLength: body.length,
+            webhookSecretLength: webhookSecret?.length || 0,
+            hasWebhookSecret: !!webhookSecret,
+            headers: Object.fromEntries(headers().entries()),
+        });
 
         // Verify the webhook signature to ensure it's from Stripe
-        // This prevents unauthorized requests
-        const event = stripe.webhooks.constructEvent(
-            body,
-            signature,
-            webhookSecret
-        );
+        let event: Stripe.Event;
+        try {
+            event = stripe.webhooks.constructEvent(
+                body,
+                signature,
+                webhookSecret
+            );
+            console.log("Successfully constructed Stripe event");
+        } catch (err) {
+            console.error("Webhook signature verification failed:", err);
+            // Log more details about the error
+            if (err instanceof Error) {
+                console.error("Error details:", {
+                    message: err.message,
+                    name: err.name,
+                    stack: err.stack,
+                });
+            }
+            return new Response(
+                JSON.stringify({ 
+                    error: "Webhook signature verification failed",
+                    details: err instanceof Error ? err.message : "Unknown error"
+                }),
+                { status: 400 }
+            );
+        }
 
         console.log("Webhook event type:", event.type);
         console.log("Webhook event data:", JSON.stringify(event.data, null, 2));
