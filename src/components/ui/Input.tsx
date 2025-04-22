@@ -29,11 +29,11 @@ export default function Input({
 }: InputProps) {
     return (
         <div className="flex flex-col gap-1 w-full">
-            {label && <p className="text-[14px] font-medium">{label}</p>}
+            {label && <p className="text-[14px] font-medium text-content">{label}</p>}
 
             <input
                 className={clsx(
-                    "bg-background border border-border rounded-lg px-2 py-2 text-white-100 placeholder:text-sm placeholder:text-content/50",
+                    "bg-background border border-border rounded-lg px-2 py-2 text-content placeholder:text-sm placeholder:text-content/50",
                     "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-inset focus:border-border transition-colors",
                     error && "border-red-500 focus:ring-red-500/50",
                     className

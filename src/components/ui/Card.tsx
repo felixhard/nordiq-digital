@@ -24,12 +24,24 @@ export default function Card({
     borderColor = "border-border",
     className,
 }: CardProps) {
-    const { theme } = useTheme();
+    // Try to use the useTheme hook, but fall back to detecting the theme from the document body
+    let themeValue = "light";
     
-    // Default background color based on theme
-    const defaultBgColor = theme === "light" 
-        ? "bg-white" 
-        : "bg-bg-gradient";
+    try {
+        // Try to use the context first
+        const { theme } = useTheme();
+        themeValue = theme;
+    } catch (e) {
+        // If useTheme fails, detect theme from body classes
+        if (typeof document !== 'undefined') {
+            themeValue = document.body.classList.contains('agency') || document.body.classList.contains('dark') 
+                ? 'dark' 
+                : 'light';
+        }
+    }
+    
+    // Default background color based on theme - use bg-background instead of hard-coded colors
+    const defaultBgColor = "bg-background";
     
     return (
         <div
@@ -41,7 +53,7 @@ export default function Card({
                 width,
                 bgColor || defaultBgColor,
                 padding,
-                theme === "light" ? "shadow-light-card" : "",
+                themeValue === "light" ? "shadow-light-card" : "",
                 className
             )}
             onClick={onClick}

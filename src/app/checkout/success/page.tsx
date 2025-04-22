@@ -31,7 +31,7 @@ export default function CheckoutSuccessPage() {
 
     return (
         <div className="relative flex flex-col justify-center items-center min-h-[100vh] bg-background">
-            <Card width="w-fit">
+            <Card width="w-fit" className="bg-background">
                 <Logo />
                 
                 <div className="flex flex-col items-center gap-4 mt-4">
@@ -45,7 +45,7 @@ export default function CheckoutSuccessPage() {
                         Thank you for your subscription. Your account has been upgraded.
                     </Text>
                     
-                    <Text textStyle="body2" className="text-gray-500">
+                    <Text textStyle="body2" className="text-content/50">
                         Redirecting to dashboard in {countdown} seconds...
                     </Text>
                     
@@ -60,7 +60,7 @@ export default function CheckoutSuccessPage() {
                 </div>
             </Card>
 
-            <Link className="text-grey-100 text-[14px] mt-4" href="/">
+            <Link className="text-content text-[14px] mt-4" href="/">
                 Back To Home
             </Link>
         </div>

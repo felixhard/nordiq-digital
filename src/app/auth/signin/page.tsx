@@ -9,14 +9,13 @@ export default async function page() {
 
     return (
         <div className="relative flex flex-col justify-center items-center min-h-[100vh] bg-background">
-            <Card width="w-fit">
+            <Card width="w-fit" className="bg-background">
                 <Logo />
 
                 <AuthForm session={session} />
             </Card>
 
-            <Link className="text-grey-100 text-[14px] mt-4" href="/">
-                {" "}
+            <Link className="text-content text-[14px] mt-4" href="/">
                 Back To Home
             </Link>
         </div>
