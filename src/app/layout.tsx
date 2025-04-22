@@ -5,6 +5,7 @@ import { auth } from "./auth";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import StructuredData from "@/components/StructuredData";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 // You can add these to subsequent pages to override these values
 // You can also query the database directly using db.blog for example to get dynamic metadata whilst keeping the layout serverside
 export const metadata: Metadata = {
-    metadataBase: new URL("https://arctisdev.com"),
+    metadataBase: new URL("https://arctisdev.se"),
     title: "ArctisDev - Web Development & SaaS Solutions",
     description: "Expert web development agency specializing in SaaS platforms, custom web solutions, and AI applications. Turn your ideas into reality with our rapid development approach.",
     keywords: "web development, SaaS platforms, AI applications, custom websites, Figma to Frontend, rapid development",
@@ -50,8 +51,7 @@ export default async function RootLayout({
     const session = await auth();
 
     return (
-        // Set the HTML language and force dark theme
-        <html lang="en" className="agency">
+        <html lang="en" suppressHydrationWarning>
             <head>
                 <StructuredData />
             </head>
@@ -59,11 +59,14 @@ export default async function RootLayout({
             <body className="min-h-[100vh] text-content">
                 {/* Wrap the app with providers and pass authentication session */}
                 <AppProviders session={session}>
-                    {/* Add toast notifications support */}
-                    <Toaster />
+                    {/* Client-side theme provider */}
+                    <ThemeProvider>
+                        {/* Add toast notifications support */}
+                        <Toaster />
 
-                    {/* Render child components */}
-                    {children}
+                        {/* Render child components */}
+                        {children}
+                    </ThemeProvider>
                 </AppProviders>
             </body>
         </html>

@@ -17,12 +17,16 @@ const config: Config = {
                 accent: "rgb(var(--accent) / <alpha-value>)",
                 primary: "rgb(var(--primary) / <alpha-value>)",
                 secondary: "rgb(var(--secondary) / <alpha-value>)",
+                "button-text": "#FFF",
+                "button-text-light": "#000",
             },
 
             backgroundImage: {
                 // These are used in the saas template
                 "heading-gradient":
                     "linear-gradient(90deg, #FFF 0%, #999 100%)",
+                "lightmode-heading-gradient":
+                    "linear-gradient(90deg, #000 0%, #000 100%)",   
                 "badge-gradient":
                     "linear-gradient(90deg, #404BE3 0%, #B5B9FC 100%)",
                 "bg-gradient":
@@ -31,6 +35,7 @@ const config: Config = {
 
             boxShadow: {
                 primary: "0px 0px 50px 0px rgba(64, 75, 227, 0.20)",
+                "light-card": "0 4px 12px rgba(0, 0, 0, 0.08)",
             },
         },
     },

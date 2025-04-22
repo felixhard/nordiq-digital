@@ -31,12 +31,12 @@ export default function Text({
     ...props
 }: Props) {
     const variants = {
-        h1: "text-4xl md:text-7xl font-heading bg-heading-gradient bg-clip-text text-transparent",
-        h2: "text-4xl md:text-5xl font-heading bg-heading-gradient bg-clip-text text-transparent",
-        h3: "text-3xl md:text-4xl font-heading bg-heading-gradient bg-clip-text text-transparent",
-        h4: "text-2xl md:text-3xl font-heading bg-heading-gradient bg-clip-text text-transparent",
-        h5: "text-xl md:text-2xl font-heading bg-heading-gradient bg-clip-text text-transparent",
-        h6: "text-lg md:text-lg font-heading bg-heading-gradient bg-clip-text text-transparent",
+        h1: "text-4xl md:text-7xl font-heading bg-heading-gradient [.light_&]:bg-lightmode-heading-gradient bg-clip-text text-transparent",
+        h2: "text-4xl md:text-5xl font-heading bg-heading-gradient [.light_&]:bg-lightmode-heading-gradient bg-clip-text text-transparent",
+        h3: "text-3xl md:text-4xl font-heading bg-heading-gradient [.light_&]:bg-lightmode-heading-gradient bg-clip-text text-transparent",
+        h4: "text-2xl md:text-3xl font-heading bg-heading-gradient [.light_&]:bg-lightmode-heading-gradient bg-clip-text text-transparent",
+        h5: "text-xl md:text-2xl font-heading bg-heading-gradient [.light_&]:bg-lightmode-heading-gradient bg-clip-text text-transparent",
+        h6: "text-lg md:text-lg font-heading bg-heading-gradient [.light_&]:bg-lightmode-heading-gradient bg-clip-text text-transparent",
         body1: "text-lg md:text-lg font-body opacity-70",
         body2: "text-md md:text-md font-body opacity-70",
         body3: "text-sm md:text-sm font-body opacity-70",

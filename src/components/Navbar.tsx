@@ -9,6 +9,7 @@ import Logo from "./branding/Logo";
 import Button from "./ui/Button";
 import Card from "./ui/Card";
 import { Iconify } from "./ui/Iconify";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,6 +40,7 @@ export default function Navbar() {
                                 </Button>
                             ))}
 
+                            <ThemeSwitcher />
                             <AuthButton />
                         </div>
 
@@ -83,6 +85,7 @@ export default function Navbar() {
                                     </Button>
                                 ))}
 
+                                <ThemeSwitcher />
                                 <AuthButton />
                             </div>
                         </div>

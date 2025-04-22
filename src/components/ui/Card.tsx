@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useTheme } from "@/context/ThemeContext";
 
 type CardProps = {
     width?: string;
@@ -15,7 +16,7 @@ type CardProps = {
 export default function Card({
     width = "w-full",
     cursor = "default",
-    bgColor = "bg-bg-gradient",
+    bgColor,
     padding = "p-4",
     children,
     onClick,
@@ -23,6 +24,13 @@ export default function Card({
     borderColor = "border-border",
     className,
 }: CardProps) {
+    const { theme } = useTheme();
+    
+    // Default background color based on theme
+    const defaultBgColor = theme === "light" 
+        ? "bg-white" 
+        : "bg-bg-gradient";
+    
     return (
         <div
             className={clsx(
@@ -31,8 +39,9 @@ export default function Card({
                 borderColor,
                 border,
                 width,
-                bgColor,
+                bgColor || defaultBgColor,
                 padding,
+                theme === "light" ? "shadow-light-card" : "",
                 className
             )}
             onClick={onClick}

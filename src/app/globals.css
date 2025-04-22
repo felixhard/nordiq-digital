@@ -45,6 +45,22 @@
     --secondary: 150 190 140;
 }
 
+.light {
+    --background: 255 255 255;
+    --background-secondary: 249 250 251;
+    --content: 17 24 39;
+    --border: 229 231 235;
+    --accent: 99 102 241;
+    --primary: 64 75 227;
+    --secondary: 16 185 129;
+}
+
 * {
     font-family: DM Sans, sans-serif;
+}
+
+/* Custom styles for the light theme */
+.light .bg-bg-gradient {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }

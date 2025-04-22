@@ -46,7 +46,7 @@ export default function Hero() {
             </Container>
 
             <div className="w-full h-full absolute top-0 left-0 z-0 opacity-30 pointer-events-none">
-                <FlickeringGrid maxOpacity={0.5} color="rgb(255, 255, 255)" />
+                {/* <FlickeringGrid maxOpacity={0.5} color="rgb(255, 255, 255)" /> */}
             </div>
         </div>
     );
