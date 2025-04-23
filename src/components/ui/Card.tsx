@@ -20,7 +20,7 @@ export default function Card({
     padding = "p-4",
     children,
     onClick,
-    border = "border-x border-t",
+    border = "border-x border-t border-b",
     borderColor = "border-border",
     className,
 }: CardProps) {

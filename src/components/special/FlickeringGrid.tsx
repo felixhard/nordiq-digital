@@ -7,6 +7,8 @@ import React, {
     useRef,
     useState,
 } from "react";
+import { useTheme } from "@/context/ThemeContext";
+import clsx from "clsx";
 
 interface FlickeringGridProps {
     squareSize?: number;
@@ -24,16 +26,22 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
     squareSize = 4,
     gridGap = 6,
     flickerChance = 0.3,
-    color = "rgb(0, 0, 0)",
+    color,
     width,
     height,
     className,
     maxOpacity = 0.3,
 }) => {
+    const { theme } = useTheme();
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [isInView, setIsInView] = useState(false);
     const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
+
+    // Theme-aware default colors
+    const defaultColor = theme === 'light' 
+        ? 'rgba(0, 0, 0, 0.1)'  // Light mode: subtle black
+        : 'rgba(150, 150, 150, 0.1)'; // Dark mode: subtle gray instead of white
 
     const memoizedColor = useMemo(() => {
         const toRGBA = (color: string) => {
@@ -44,13 +52,16 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
             canvas.width = canvas.height = 1;
             const ctx = canvas.getContext("2d");
             if (!ctx) return "rgba(255, 0, 0,";
-            ctx.fillStyle = color;
+            ctx.fillStyle = color || defaultColor;
             ctx.fillRect(0, 0, 1, 1);
             const [r, g, b] = Array.from(ctx.getImageData(0, 0, 1, 1).data);
             return `rgba(${r}, ${g}, ${b},`;
         };
-        return toRGBA(color);
-    }, [color]);
+        return toRGBA(color || defaultColor);
+    }, [color, defaultColor]);
+
+    // Theme-aware max opacity
+    const themeMaxOpacity = theme === 'light' ? maxOpacity * 0.5 : maxOpacity;
 
     const setupCanvas = useCallback(
         (canvas: HTMLCanvasElement, width: number, height: number) => {
@@ -64,23 +75,23 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
 
             const squares = new Float32Array(cols * rows);
             for (let i = 0; i < squares.length; i++) {
-                squares[i] = Math.random() * maxOpacity;
+                squares[i] = Math.random() * themeMaxOpacity;
             }
 
             return { cols, rows, squares, dpr };
         },
-        [squareSize, gridGap, maxOpacity]
+        [squareSize, gridGap, themeMaxOpacity]
     );
 
     const updateSquares = useCallback(
         (squares: Float32Array, deltaTime: number) => {
             for (let i = 0; i < squares.length; i++) {
                 if (Math.random() < flickerChance * deltaTime) {
-                    squares[i] = Math.random() * maxOpacity;
+                    squares[i] = Math.random() * themeMaxOpacity;
                 }
             }
         },
-        [flickerChance, maxOpacity]
+        [flickerChance, themeMaxOpacity]
     );
 
     const drawGrid = useCallback(
@@ -203,7 +214,17 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
     }, [setupCanvas, updateSquares, drawGrid, width, height, isInView]);
 
     return (
-        <div ref={containerRef} className={`w-full h-full ${className}`}>
+        <div 
+            ref={containerRef} 
+            className={clsx(
+                "w-full h-full",
+                "before:absolute before:inset-0",
+                theme === 'dark' 
+                    ? "before:bg-background/30 before:shadow-[0_0_30px_rgba(0,0,0,0.3)]" 
+                    : "before:bg-background/20",
+                className
+            )}
+        >
             <canvas
                 ref={canvasRef}
                 className="pointer-events-none"
@@ -213,6 +234,32 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
                 }}
             />
         </div>
+    );
+};
+
+export const SubtleGrid: React.FC<FlickeringGridProps> = ({
+    squareSize = 4,
+    gridGap = 6,
+    className,
+    width,
+    height,
+}) => {
+    return (
+        <div 
+            className={clsx(
+                "relative w-full h-full",
+                "bg-gradient-to-br from-gray-50 to-white",
+                "before:absolute before:inset-0",
+                "before:bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)]",
+                "before:bg-[size:4px_4px]",
+                "before:opacity-50",
+                className
+            )}
+            style={{
+                width: width || '100%',
+                height: height || '100%',
+            }}
+        />
     );
 };
 

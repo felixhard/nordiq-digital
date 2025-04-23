@@ -29,6 +29,8 @@ const config: Config = {
                     "linear-gradient(90deg, #000 0%, #000 100%)",   
                 "badge-gradient":
                     "linear-gradient(90deg, #404BE3 0%, #B5B9FC 100%)",
+                "lightmode-badge-gradient":
+                    "linear-gradient(90deg, #404BE3 0%, #404BE3 100%)",
                 "bg-gradient":
                     "linear-gradient(118deg, #111 3.48%, rgba(17, 17, 17, 0.00) 100%)",
             },

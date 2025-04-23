@@ -18,7 +18,7 @@ export default function ContactUs() {
                     <div className="flex flex-col">
                         <FadeIn duration={100}>
                             <SectionHeader
-                                title="Need to talk to us?"
+                                title="Want to talk to us?"
                                 badge={<Badge>Let's Chat</Badge>}
                                 justify="start"
                                 description="Fill out the form or book a 30 minute chat, let's see how we can help you."

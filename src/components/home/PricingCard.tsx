@@ -85,15 +85,15 @@ export default function PricingCard({ plan }: PricingCardProps) {
             bgColor="bg-background"
             border={
                 plan.name === "Fullstack MVP"
-                    ? "border-x-2 border-t-2"
-                    : "border-x border-t"
+                    ? "border-x-2 border-t-2 border-b-2"
+                    : "border-x border-t border-b"
             }
             borderColor={
                 plan.name === "Fullstack MVP" ? "border-primary" : "border-border"
             }
             className={
                 plan.name === "Fullstack MVP"
-                    ? "shadow-orange -mt-0 mb-0 md:-mt-8 md:mb-8"
+                    ? "shadow-[0_0_30px_rgba(64,75,227,0.2)] -mt-0 mb-0 md:-mt-8 md:mb-8"
                     : ""
             }
         >

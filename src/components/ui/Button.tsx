@@ -33,11 +33,11 @@ const baseButtonClasses =
 // Variant classes mapping
 const variantClasses: Record<ButtonVariant, string> = {
     primary:
-        "bg-primary text-content [.light_&]:text-white hover:opacity-80 border-t-2 border-x border-white/50",
+        "bg-primary text-content [.light_&]:text-white hover:opacity-80 border-t border-b border-x border-white/50",
     secondary:
-        "bg-background-secondary text-content hover:opacity-80 border-t-2 border-x border-white/20 [.light_&]:border-gray-300",
+        "bg-background-secondary text-content hover:opacity-80 border-t border-b border-x border-white/20 [.light_&]:border-gray-300",
     tertiary:
-        "bg-primary/10 text-content hover:opacity-80 border-t-2 border-x border-white/30",
+        "bg-primary/10 text-content hover:opacity-80 border-t border-b border-x border-white/30",
     danger: "bg-red-500 text-white hover:opacity-80",
     ghost: "bg-transparent text-content",
 };

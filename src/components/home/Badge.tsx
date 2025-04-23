@@ -30,7 +30,7 @@ export default function Badge({
             <p
                 className={clsx(
                     useGradientText &&
-                        "bg-clip-text text-transparent bg-badge-gradient"
+                        "bg-clip-text text-transparent bg-badge-gradient [.light_&]:bg-lightmode-badge-gradient"
                 )}
             >
                 {children}
